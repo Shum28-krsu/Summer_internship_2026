@@ -1,0 +1,25 @@
+{% extends "monitoring/base.html" %}
+{% block title %}Сводка — Станция мониторинга{% endblock %}
+{% block content %}
+<h1>Сводка по параметрам</h1>
+<p class="muted">
+    <span class="badge">Станций: {{ stations_count }}</span>
+    &nbsp;
+    <span class="badge">Наблюдений: {{ observations_count }}</span>
+</p>
+
+<table>
+    <tr><th>Параметр</th><th>Кол-во</th><th>Мин.</th><th>Макс.</th><th>Среднее</th></tr>
+    {% for row in summary %}
+    <tr>
+        <td>{{ row.label }}</td>
+        <td>{{ row.count }}</td>
+        <td>{{ row.min_value }}</td>
+        <td>{{ row.max_value }}</td>
+        <td>{{ row.avg_value }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="muted">Нет данных</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

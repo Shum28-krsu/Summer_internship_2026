@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Станция мониторинга{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+            color: #1f2933;
+        }
+        header {
+            background: #2f5d8a;
+            color: white;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header a { color: white; text-decoration: none; font-weight: 600; }
+        nav a {
+            color: #d7e6f7;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+        nav a:hover { color: white; }
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 28px 20px 60px;
+        }
+        h1 { font-size: 22px; margin-bottom: 18px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e5e9ef;
+            font-size: 14px;
+        }
+        th {
+            background: #2f5d8a;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) td { background: #f8fafc; }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .card a { color: #2f5d8a; font-weight: 600; text-decoration: none; }
+        .card a:hover { text-decoration: underline; }
+        .muted { color: #6b7280; font-size: 13px; }
+        .filters {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .filters label { font-size: 13px; margin-right: 6px; color: #4b5563; }
+        .filters input, .filters select {
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin-right: 14px;
+            font-size: 13px;
+        }
+        .filters button {
+            background: #2f5d8a;
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #e5edf7;
+            color: #2f5d8a;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{% url 'monitoring:stations_list' %}">Станция мониторинга</a>
+        <nav>
+            <a href="{% url 'monitoring:stations_list' %}">Станции</a>
+            <a href="{% url 'monitoring:dashboard' %}">Сводка</a>
+            <a href="/admin/">Админ-панель</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

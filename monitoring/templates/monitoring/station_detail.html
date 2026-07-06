@@ -1,0 +1,49 @@
+{% extends "monitoring/base.html" %}
+{% block title %}{{ station.name }} — Станция мониторинга{% endblock %}
+{% block content %}
+<h1>{{ station.name }}</h1>
+<p class="muted">{{ station.location }} · установлена {{ station.installed_at }}</p>
+
+<h2 style="font-size:16px; margin-top:24px;">Последние показания</h2>
+<table>
+    <tr><th>Параметр</th><th>Значение</th><th>Дата/время</th></tr>
+    {% for obs in last_observations %}
+    <tr>
+        <td>{{ obs.get_parameter_display }}</td>
+        <td>{{ obs.value }} {{ obs.unit }}</td>
+        <td>{{ obs.observed_at }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3" class="muted">Нет данных</td></tr>
+    {% endfor %}
+</table>
+
+<h2 style="font-size:16px; margin-top:28px;">Все наблюдения</h2>
+<form class="filters" method="get">
+    <label>Параметр
+        <select name="parameter">
+            <option value="">Все</option>
+            {% for value, label in parameter_choices %}
+            <option value="{{ value }}" {% if selected_parameter == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>С <input type="date" name="from" value="{{ date_from }}"></label>
+    <label>По <input type="date" name="to" value="{{ date_to }}"></label>
+    <button type="submit">Применить</button>
+</form>
+
+<table>
+    <tr><th>Дата/время</th><th>Параметр</th><th>Значение</th><th>Ед. изм.</th></tr>
+    {% for obs in observations %}
+    <tr>
+        <td>{{ obs.observed_at }}</td>
+        <td>{{ obs.get_parameter_display }}</td>
+        <td>{{ obs.value }}</td>
+        <td>{{ obs.unit }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="muted">Наблюдений по заданным фильтрам не найдено</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

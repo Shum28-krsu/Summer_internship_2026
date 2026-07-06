@@ -1,0 +1,14 @@
+{% extends "monitoring/base.html" %}
+{% block title %}Станции — Станция мониторинга{% endblock %}
+{% block content %}
+<h1>Станции мониторинга</h1>
+
+{% for station in stations %}
+<div class="card">
+    <a href="{% url 'monitoring:station_detail' station.pk %}">{{ station.name }}</a>
+    <div class="muted">{{ station.location }} · установлена {{ station.installed_at }}</div>
+</div>
+{% empty %}
+<p class="muted">Станции пока не добавлены.</p>
+{% endfor %}
+{% endblock %}
